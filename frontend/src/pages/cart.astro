@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Shopping Cart">
+  <Navbar />
+
+  <div class="bg-[#F4F7FE] min-h-screen py-10 px-4">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left: Cart Items -->
+      <div class="lg:col-span-2 space-y-6">
+        <h1 class="text-3xl font-black text-slate-800 tracking-tight">Shopping Cart</h1>
+        
+        <!-- Cart Item Card -->
+        <div class="bg-white p-6 rounded-[2rem] border border-slate-100 flex gap-6 items-center shadow-sm">
+          <div class="w-32 h-32 flex-shrink-0">
+             <img 
+               src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f3?q=80&w=400" 
+               alt="Product" 
+               class="w-full h-full object-cover rounded-[1.5rem]" 
+             />
+          </div>
+          
+          <div class="flex-grow space-y-2">
+            <h3 class="text-xl font-black text-slate-800">Premium Snack Combo</h3>
+            <p class="text-xs font-black text-green-600 bg-green-50 px-3 py-1 rounded-full w-max">In Stock</p>
+            <div class="flex items-center gap-4 pt-2">
+              <select class="bg-slate-100 px-4 py-2 font-bold rounded-xl outline-none hover:bg-slate-200 transition-colors">
+                <option>Qty: 1</option>
+                <option>2</option>
+              </select>
+              <button class="font-bold text-slate-400 hover:text-red-500 transition-all text-sm">Remove</button>
+            </div>
+          </div>
+          
+          <div class="text-right">
+            <p class="text-2xl font-black text-slate-900">₹450</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-1">
+  <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 sticky top-24">
+    <h2 class="font-black text-slate-400 uppercase text-xs mb-6 tracking-widest">Order Summary</h2>
+    
+    <div class="space-y-4 pb-6 border-b border-slate-100">
+      <div class="flex justify-between font-bold text-slate-600"><span>Subtotal</span><span>₹450</span></div>
+    </div>
+    
+    <div class="flex justify-between py-6 text-2xl font-black text-slate-900">
+      <span>Total</span><span>₹450</span>
+    </div>
+    
+    <button class="w-full bg-[#7F2EE5] hover:bg-[#6c28c4] text-white py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-2 shadow-lg shadow-purple-200 transition-all duration-300 active:scale-[0.98]">
+      PLACE ORDER 
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+    
+    <div class="mt-6 text-center">
+      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">🔒 100% Secure Checkout</span>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</Layout>

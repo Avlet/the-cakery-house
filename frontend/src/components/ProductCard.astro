@@ -1,0 +1,57 @@
+---
+const { name, price, imageUrl, rating, deliveryTime } = Astro.props;
+---
+
+<div 
+  class="group cursor-pointer flex flex-col h-full bg-white rounded-3xl border border-slate-100 shadow-[0_4px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden relative"
+  onclick={`openProductModal(${JSON.stringify({
+    name: name,
+    price: price,
+    imageUrl: imageUrl,
+    rating: rating
+  })})`}
+>
+  <div class="relative w-full pt-[80%] overflow-hidden">
+    <img src={imageUrl} alt={name} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+    
+    <button     
+      class="absolute top-3 right-3 z-10 bg-white/90 backdrop-blur p-2 rounded-full shadow-sm hover:scale-110 transition-transform"
+      onclick="event.stopPropagation(); this.querySelector('svg').classList.toggle('fill-red-500'); this.querySelector('svg').classList.toggle('stroke-red-500')"
+    >
+      <svg class="w-5 h-5 stroke-slate-400 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="p-4 flex flex-col flex-grow">
+    <h3 class="font-bold text-slate-800 text-sm mb-1 line-clamp-1">{name}</h3>
+    <p class="text-[10px] text-slate-400 font-medium mb-3">{deliveryTime}</p>
+    
+    <div class="mt-auto">
+      <div class="flex items-center justify-between mb-3">
+        <span class="font-black text-[#7F2EE5] text-lg">₹{price}</span>
+        <span class="flex items-center text-[10px] font-bold text-amber-500 bg-amber-50 px-2 py-1 rounded-lg">★ {rating}</span>
+      </div>
+      
+      <button 
+        class="w-full bg-[#7F2EE5] text-white py-2.5 rounded-xl font-bold text-xs hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/20 active:scale-[0.98]"
+        onclick="event.stopPropagation(); animateCart(this)"
+      >
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function animateCart(btn) {
+    const originalText = btn.innerText;
+    btn.innerText = 'Added!';
+    btn.classList.add('bg-green-500');
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.classList.remove('bg-green-500');
+    }, 1200);
+  }
+</script>

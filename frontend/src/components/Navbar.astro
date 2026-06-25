@@ -1,0 +1,118 @@
+---
+---
+<!-- Sticky wrapper जो हमेशा स्क्रीन के ऊपर रहेगा -->
+<div id="navbar-wrapper" class="sticky top-0 w-full z-50 pt-6 px-4 md:px-16 transition-all duration-500 ease-in-out">
+    <div id="main-nav" class="max-w-7xl mx-auto glass-nav rounded-full px-8 py-4 flex justify-between items-center shadow-sm transition-all duration-500 ease-in-out border border-white/50 relative">
+        
+        <!-- लेफ्ट side: लोगो एरिया (w-64 से टेक्स्ट कभी ब्रेक नहीं होगा) -->
+        <div id="logo-block" class="flex items-center relative h-12 w-64 transition-all duration-500">
+            <!-- डिफ़ॉल्ट टेक्स्ट लोगो -->
+            <span id="text-logo" class="text-xl font-extrabold text-[#7F2EE5] tracking-wide absolute left-0 whitespace-nowrap transition-all duration-500 ease-in-out opacity-100 block">
+                THE CAKERY HOUSE
+            </span>
+            
+            <!-- स्क्रॉल होने पर दिखने वाला गोल लोगो -->
+            <img 
+                id="circle-logo" 
+                src="/logo.png" 
+                alt="The Cakery House" 
+                class="w-16 h-16 absolute left-[-45px] shadow-lg opacity-0 transform scale-50 -rotate-90 transition-all duration-500 ease-in-out pointer-events-none z-20"
+            />
+        </div>
+
+        <!-- राइट side: मेनू लिंक्स -->
+        <div id="menu-links" class="flex space-x-8 font-semibold text-slate-600 transition-all duration-500 ease-in-out">
+            <a href="/" class="hover:text-[#7F2EE5] transition-colors duration-300">Home</a>
+            <a href="/shop" class="hover:text-[#7F2EE5] transition-colors duration-300">Shop</a>
+            <a href="/account" class="hover:text-[#7F2EE5] transition-colors duration-300">Account</a>
+            <a href="/cart" class="hover:text-[#7F2EE5] transition-colors duration-300 flex items-center">
+                Cart 
+                <span class="ml-2 bg-[#7F2EE5] text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const initNavbar = () => {
+        const wrapper = document.getElementById('navbar-wrapper');
+        const mainNav = document.getElementById('main-nav');
+        const logoBlock = document.getElementById('logo-block');
+        const textLogo = document.getElementById('text-logo');
+        const circleLogo = document.getElementById('circle-logo');
+        const menuLinks = document.getElementById('menu-links');
+
+        if (!wrapper || !mainNav || !logoBlock || !textLogo || !circleLogo || !menuLinks) return;
+
+        window.addEventListener('scroll', () => {
+            const isScrolled = window.scrollY > 50;
+
+            // 1. बाहरी रैपर पैडिंग हैंडल करें
+            if (isScrolled) {
+                wrapper.classList.remove('pt-6');
+                wrapper.classList.add('pt-3');
+            } else {
+                wrapper.classList.add('pt-6');
+                wrapper.classList.remove('pt-3');
+            }
+
+            // 2. नवबार कंटेनर की चौड़ाई और साइज (Shrink Effect)
+            mainNav.classList.toggle('max-w-7xl', !isScrolled);
+            mainNav.classList.toggle('px-8', !isScrolled);
+            mainNav.classList.toggle('py-4', !isScrolled);
+            
+            mainNav.classList.toggle('max-w-xl', isScrolled);
+            mainNav.classList.toggle('px-12', isScrolled);
+            mainNav.classList.toggle('py-2', isScrolled);
+            mainNav.classList.toggle('border-[#7F2EE5]', isScrolled);
+            mainNav.classList.toggle('shadow-md', isScrolled);
+            
+            // 3. लोगो ब्लॉक की चौड़ाई सेट करें
+            if (isScrolled) {
+                logoBlock.classList.remove('w-64');
+                logoBlock.classList.add('w-16');
+            } else {
+                logoBlock.classList.add('w-64');
+                logoBlock.classList.remove('w-16');
+            }
+
+            // 4. टेक्स्ट लोगो को गायब / शो करें
+            textLogo.classList.toggle('opacity-100', !isScrolled);
+            textLogo.classList.toggle('block', !isScrolled);
+            textLogo.classList.toggle('opacity-0', isScrolled);
+            textLogo.classList.toggle('hidden', isScrolled);
+            
+            // 5. गोल लोगो को ऑन / ऑफ करें
+            circleLogo.classList.toggle('opacity-0', !isScrolled);
+            circleLogo.classList.toggle('scale-50', !isScrolled);
+            circleLogo.classList.toggle('-rotate-90', !isScrolled);
+            circleLogo.classList.toggle('pointer-events-none', !isScrolled);
+            
+            circleLogo.classList.toggle('opacity-100', isScrolled);
+            circleLogo.classList.toggle('scale-100', isScrolled);
+            circleLogo.classList.toggle('rotate-0', isScrolled);
+            circleLogo.classList.toggle('pointer-events-auto', isScrolled);
+
+            // 6. लिंक्स स्पेसिंग
+            if (isScrolled) {
+                menuLinks.classList.remove('space-x-8');
+                menuLinks.classList.add('space-x-6');
+            } else {
+                menuLinks.classList.add('space-x-8');
+                menuLinks.classList.remove('space-x-6');
+            }
+        });
+    };
+
+    // इनिशियल लोड और Astro पेज चेंज दोनों को सपोर्ट करने के लिए
+    initNavbar();
+    document.addEventListener('astro:after-swap', initNavbar);
+</script>
+
+<style>
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+</style>

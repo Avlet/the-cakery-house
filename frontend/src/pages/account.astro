@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="My Account">
+  <Navbar />
+  
+  <div class="min-h-screen bg-[#F4F7FE] py-12 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Profile Header -->
+      <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 flex items-center justify-between mt-8 mb-8">
+        <div class="flex items-center gap-6">
+          <img src="https://ui-avatars.com/api/?name=Rahul+Sharma&background=7F2EE5&color=fff" class="w-20 h-20 rounded-2xl shadow-lg" />
+          <div>
+            <h1 class="text-2xl font-black text-slate-800">Rahul Sharma</h1>
+            <p class="text-slate-400">rahul@example.com</p>
+          </div>
+        </div>
+        <button id="edit-btn" class="px-6 py-3 bg-[#7F2EE5] text-white font-bold rounded-2xl">Edit Profile</button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-4 overflow-x-auto pb-4 mb-6">
+        <button class="account-tab active-tab bg-[#7F2EE5] text-white px-6 py-3 rounded-2xl font-bold whitespace-nowrap" data-target="orders">Orders</button>
+        <button class="account-tab bg-white text-slate-600 px-6 py-3 rounded-2xl font-bold shadow-sm whitespace-nowrap" data-target="wishlist">Wishlist</button>
+        <button class="account-tab bg-white text-slate-600 px-6 py-3 rounded-2xl font-bold shadow-sm whitespace-nowrap" data-target="address">Addresses</button>
+        <button class="account-tab bg-white text-slate-600 px-6 py-3 rounded-2xl font-bold shadow-sm whitespace-nowrap" data-target="payments">Payments</button>
+      </div>
+
+      <!-- Content Area -->
+      <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 min-h-[400px]">
+        
+        <!-- Orders -->
+        <div id="orders" class="tab-content">
+          <h2 class="text-xl font-black mb-6">Recent Orders</h2>
+          <div class="space-y-4">
+            {['Snack Treat Combo', 'Choco Lava Pack', 'Party Decor Kit'].map(item => (
+              <div class="p-4 bg-slate-50 rounded-2xl flex justify-between items-center">
+                <div><p class="font-bold">{item}</p><p class="text-xs text-slate-400">Delivered 20 June 2026</p></div>
+                <span class="font-black text-[#7F2EE5]">₹450</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Wishlist -->
+        <div id="wishlist" class="tab-content hidden">
+          <h2 class="text-xl font-black mb-6">Your Wishlist</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {['Premium Dry Fruits', 'Birthday Special Cake'].map(item => (
+              <div class="p-4 border border-slate-100 rounded-2xl font-bold">{item}</div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div id="address" class="tab-content hidden">
+          <h2 class="text-xl font-black mb-6">Saved Addresses</h2>
+          <div class="p-6 bg-slate-50 rounded-2xl">
+            <p class="font-bold">Rahul Sharma</p>
+            <p class="text-slate-500">123, Sunshine Colony, Dahod, Gujarat - 389001</p>
+          </div>
+        </div>
+
+        <!-- Payments -->
+        <div id="payments" class="tab-content hidden">
+          <h2 class="text-xl font-black mb-6">Payment Methods</h2>
+          <div class="p-4 bg-slate-50 rounded-2xl flex justify-between items-center">
+            <p class="font-bold">Visa ending in 4242</p>
+            <span class="text-xs bg-white px-2 py-1 rounded-lg border">Default</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <!-- Edit Profile Popup -->
+<div id="edit-modal" class="fixed inset-0 z-[100] hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white p-8 rounded-[2rem] w-full max-w-lg relative shadow-2xl">
+    <!-- Close Button -->
+    <button id="close-modal" class="absolute top-6 right-6 text-2xl text-slate-400 hover:text-slate-800">&times;</button>
+    
+    <h2 class="text-2xl font-black mb-6 text-slate-800">Edit Profile Details</h2>
+    
+    <form class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-bold text-slate-400 ml-1">First Name</label>
+          <input type="text" value="Rahul" class="w-full p-4 mt-1 bg-slate-100 rounded-2xl outline-none focus:ring-2 ring-[#7F2EE5]" />
+        </div>
+        <div>
+          <label class="text-xs font-bold text-slate-400 ml-1">Last Name</label>
+          <input type="text" value="Sharma" class="w-full p-4 mt-1 bg-slate-100 rounded-2xl outline-none focus:ring-2 ring-[#7F2EE5]" />
+        </div>
+      </div>
+      
+      <div>
+        <label class="text-xs font-bold text-slate-400 ml-1">Email Address</label>
+        <input type="email" value="rahul@example.com" class="w-full p-4 mt-1 bg-slate-100 rounded-2xl outline-none focus:ring-2 ring-[#7F2EE5]" />
+      </div>
+      
+      <div>
+        <label class="text-xs font-bold text-slate-400 ml-1">Phone Number</label>
+        <input type="tel" value="+91 98765 43210" class="w-full p-4 mt-1 bg-slate-100 rounded-2xl outline-none focus:ring-2 ring-[#7F2EE5]" />
+      </div>
+      
+      <div>
+        <label class="text-xs font-bold text-slate-400 ml-1">Full Address</label>
+        <textarea class="w-full p-4 mt-1 bg-slate-100 rounded-2xl outline-none focus:ring-2 ring-[#7F2EE5] resize-none h-24">123, Sunshine Colony, Dahod, Gujarat - 389001</textarea>
+      </div>
+      
+      <!-- Save Button -->
+      <button type="button" onclick="alert('Profile Updated Successfully!')" class="w-full bg-[#7F2EE5] text-white p-4 rounded-2xl font-black mt-4 hover:bg-purple-700 transition-all">
+        Save All Changes
+      </button>
+    </form>
+  </div>
+</div>
+</Layout>
+
+<script is:inline>
+  // Popup Logic
+  document.getElementById('edit-btn').onclick = () => document.getElementById('edit-modal').classList.remove('hidden');
+  document.getElementById('close-modal').onclick = () => document.getElementById('edit-modal').classList.add('hidden');
+
+  // Tab Highlighting Logic
+  document.querySelectorAll('.account-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.account-tab').forEach(t => {
+        t.classList.remove('bg-[#7F2EE5]', 'text-white');
+        t.classList.add('bg-white', 'text-slate-600');
+      });
+      tab.classList.remove('bg-white', 'text-slate-600');
+      tab.classList.add('bg-[#7F2EE5]', 'text-white');
+
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+      document.getElementById(tab.getAttribute('data-target')).classList.remove('hidden');
+    });
+  });
+</script>

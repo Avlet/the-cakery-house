@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Footer from '../components/Footer.astro';
+
+// ... (allProducts data wahi purana rakha hai)
+const allProducts = [
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 99, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1599493356626-9fdbdabfd9bd?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.5, delivery_time: '20 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 110, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1585109649139-366815a0d713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.1, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 75, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1673646961328-c73825153372?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.3, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 125, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1647144013544-2617adc86729?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.5, delivery_time: '20 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 65, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1733907502035-9631c6410c44?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ?w=500', rating: 4.1, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 150, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1546637778-7f93d2928e07?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.1, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 75, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1596449870280-83df0de3f4fc?q=80&w=1114&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.5, delivery_time: '20 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 120, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1598971948240-6aa21328371b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.1, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 99, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1605704873349-631c8f0fa42c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ?w=500', rating: 4.1, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 100+i, name: `Snack Treat ${i+1}`, price: 75, category: 'snacks', image_url: 'https://images.unsplash.com/photo-1738986586823-bba0e1c11372?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D  ?w=500', rating: 4.1, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 149, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1599785209707-a456fc1337bb?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.8, delivery_time: '15 Min' })),
+   ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 120, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1645602996177-e30e95e58c4f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.3, delivery_time: '15 Min' })),
+    ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 75, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.8, delivery_time: '15 Min' })),
+     ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 99, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1709209579095-6218bb2ba75d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.4, delivery_time: '15 Min' })),
+      ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 130, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.8, delivery_time: '15 Min' })),
+       ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 140, category: 'desserts', image_url: 'https://plus.unsplash.com/premium_photo-1669680785708-2c756ee97de8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '15 Min' })),
+        ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 99, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1728774283246-b0e6eea31e34?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.1, delivery_time: '15 Min' })),
+         ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 200, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1593424718424-cf4d83f3def1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.3, delivery_time: '15 Min' })),
+          ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 135, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1643312767944-d9d6d72798b0?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.4, delivery_time: '15 Min' })),
+           ...Array.from({length: 1}, (_, i) => ({ id: 200+i, name: `Sweet Bite ${i+1}`, price: 115, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1631397833256-34809ae27872?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.5, delivery_time: '15 Min' })),
+             ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 79, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1560508179-1a308735759c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 99, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1662550577541-5e8f192e6514?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+    ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 75, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1587223962930-cb7f31384c19?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+      ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 120, category: 'drinks', image_url: 'https://plus.unsplash.com/premium_photo-1695035005979-0682199ef755?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+        ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 49, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+          ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 99, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1497534446932-c925b458314e?q=80&w=772&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+            ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 130, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1506802913710-40e2e66339c9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+              ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 120, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1556881286-fc6915169721?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+                ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 99, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.2, delivery_time: '10 Min' })),
+                  ...Array.from({length: 1}, (_, i) => ({ id: 300+i, name: `Cool Sip ${i+1}`, price: 79, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500', rating: 4.2, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://plus.unsplash.com/premium_photo-1717016931757-efbc303fa79f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.9, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://images.unsplash.com/photo-1626263468007-a9e0cf83f1ac?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.1, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://images.unsplash.com/photo-1622621746668-59fb299bc4d7?q=80&w=933&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.3, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://plus.unsplash.com/premium_photo-1716582338435-8c13a261d3ab?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.3, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://images.unsplash.com/photo-1623428454614-abaf00244e52?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.8, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://plus.unsplash.com/premium_photo-1723709001550-aef820185131?q=80&w=945&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.5, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://plus.unsplash.com/premium_photo-1713447395823-2e0b40b75a89?q=80&w=682&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.9, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://images.unsplash.com/photo-1569289522127-c0452f372d46?q=80&w=681&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.3, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://plus.unsplash.com/premium_photo-1716484895310-9bb1828d5632?q=80&w=1208&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.4, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 400+i, name: `Cake Slice ${i+1}`, price: 499, category: 'cakes', image_url: 'https://images.unsplash.com/photo-1506459225024-1428097a7e18?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.5, delivery_time: '40 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1623000850293-0cbbc517c719?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1734692928513-351516b38869?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1656821991459-ae723d90d648?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1575377427642-087cf684f29d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1553452118-621e1f860f43?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1633673520644-7acbd28559d4?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1612547945519-215715c19336?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1612172914649-26000db6568e?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1600231409360-e58ed635543a?q=80&w=886&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 500+i, name: `Choco Bar ${i+1}`, price: 199, category: 'chocolates', image_url: 'https://images.unsplash.com/photo-1604815891325-0f9c17688328?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.7, delivery_time: '10 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1632289776289-1c692301709f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1775887758079-6df6481cd9e7?q=80&w=1162&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://plus.unsplash.com/premium_photo-1675881736481-079c77f82353?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D ?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1646558583289-41e3c22a3e48?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1689601535474-195d10eca664?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1555077730-1b8b211018c4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1688153008933-a2808ff3ef1b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://plus.unsplash.com/premium_photo-1692880430217-00731a66c1ec?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1763634708735-003d172bf637?q=80&w=1175&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+  ...Array.from({length: 1}, (_, i) => ({ id: 600+i, name: `Party Decor ${i+1}`, price: 299, category: 'decor', image_url: 'https://images.unsplash.com/photo-1749880021846-4533adbbaf62?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=500', rating: 4.6, delivery_time: '15 Min' })),
+
+];
+
+// 1. 'All Items' add kiya
+const categoriesData = [
+  { id: "all", name: "All Items", icon: "✨" },
+  { id: "desserts", name: "Desserts", icon: "🧁" },
+  { id: "snacks", name: "Snacks", icon: "🍿" },
+  { id: "drinks", name: "Drinks", icon: "🥤" },
+  { id: "cakes", name: "Cakes", icon: "🎂" },
+  { id: "chocolates", name: "Chocolates", icon: "🍫" },
+  { id: "decor", name: "Decor", icon: "🎈" }
+];
+---
+
+<Layout title="Shop - The Cakery House">
+  <Navbar />
+  
+  <main class="w-full max-w-[80rem] mx-auto px-6 mt-6 mb-16">
+    
+    <section class="overflow-x-auto hide-scrollbar mb-8">
+      <div id="category-container" class="flex justify-start space-x-4 min-w-max pb-2">
+        {categoriesData.map((cat, index) => (
+          <button 
+            class={`category-btn flex items-center px-8 py-3 rounded-full font-bold text-sm transition-all duration-300 border ${index === 0 ? 'active-tab' : 'inactive-tab'}`}
+            data-category={cat.id}
+          >
+            <span class="text-base mr-2">{cat.icon}</span> {cat.name}
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <section>
+  <div id="shop-products-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+    
+    {allProducts.map((product) => (
+      <div class="product-card-container" data-category={product.category}>
+        <ProductCard 
+          name={product.name}
+          price={product.price}
+          imageUrl={product.image_url}
+          rating={product.rating}
+          deliveryTime={product.delivery_time}
+        />
+      </div>
+    ))}
+
+  </div>
+</section>
+  </main>
+
+  <div id="product-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/40 backdrop-blur-md p-4 animate-in fade-in duration-300">
+  <div class="bg-white rounded-[2rem] w-full max-w-lg shadow-[0_30px_60px_rgba(0,0,0,0.2)] overflow-hidden relative">
+    <button id="close-modal" class="absolute top-4 right-4 z-10 bg-black/20 hover:bg-black/40 text-white rounded-full w-8 h-8 transition-colors">&times;</button>
+    
+    <div id="modal-content">
+      <img id="modal-img" src="" class="w-full h-64 object-cover" />
+      <div class="p-6">
+        <h2 id="modal-title" class="text-3xl font-black text-slate-900 mb-2"></h2>
+        <div class="flex items-center justify-between mb-4">
+          <p id="modal-price" class="text-2xl font-black text-[#7F2EE5]"></p>
+          <span class="bg-purple-50 text-[#7F2EE5] px-3 py-1 rounded-full text-xs font-bold">Premium Quality</span>
+        </div>
+        <p class="text-slate-500 text-sm mb-6">Freshly baked and prepared with the finest ingredients to ensure the perfect taste in every bite.</p>
+        
+        <button class="w-full bg-[#7F2EE5] hover:bg-purple-700 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-purple-500/30 transition-all active:scale-[0.98]">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .inactive-tab { background: #ffffff; border: 1px solid #e2e8f0; color: #64748b; }
+  .active-tab { background: #7F2EE5; border-color: #7F2EE5; color: white; }
+
+  /* Grid alignment */
+  #shop-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 1.5rem;
+  }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+</style>
+
+<script is:inline>
+  const modal = document.getElementById('product-modal');
+  window.openProductModal = (product) => {
+    document.getElementById('modal-title').innerText = product.name;
+    document.getElementById('modal-price').innerText = '₹' + product.price;
+    document.getElementById('modal-img').src = product.imageUrl;
+    modal.classList.remove('hidden');
+  };
+
+  document.getElementById('close-modal').addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+</script>
+
+<script is:inline>
+    const buttons = document.querySelectorAll('.category-btn');
+    const products = document.querySelectorAll('.product-card-container');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const cat = btn.getAttribute('data-category');
+            
+            // Buttons ka active state
+            buttons.forEach(b => {
+                b.classList.remove('active-tab');
+                b.classList.add('inactive-tab');
+            });
+            btn.classList.add('active-tab');
+            btn.classList.remove('inactive-tab');
+
+            // Filter logic
+            products.forEach(card => {
+                // Yahan 'grid' ya 'flex' check karein jo aapke main container ki class hai
+                if (cat === 'all' || card.getAttribute('data-category') === cat) {
+                    card.style.display = 'block'; 
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

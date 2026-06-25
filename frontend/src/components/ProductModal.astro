@@ -1,0 +1,27 @@
+<div id="product-modal" class="fixed inset-0 z-[999] hidden flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+  <div class="bg-white rounded-[2.5rem] w-full max-w-4xl shadow-2xl relative flex flex-col md:flex-row overflow-hidden h-[500px]">
+    <button id="close-modal" class="absolute top-6 right-6 z-20 bg-black/20 text-white p-2 rounded-full">&times;</button>
+
+    <div class="w-full md:w-1/2 h-80 md:h-full bg-slate-100 relative overflow-hidden">
+      <div id="slider-wrapper" class="w-full h-full"></div>
+    </div>
+
+    <div class="w-full md:w-1/2 p-12">
+        <h2 id="modal-title" class="text-3xl font-black mb-4"></h2>
+        <div id="modal-price" class="text-2xl font-black text-[#7F2EE5] mb-4"></div>
+        <button class="w-full bg-[#7F2EE5] text-white py-4 rounded-2xl font-bold">Add to Cart</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const modal = document.getElementById('product-modal');
+  window.openProductModal = (product) => {
+    document.getElementById('modal-title').innerText = product.name;
+    document.getElementById('modal-price').innerText = '₹' + product.price;
+    document.getElementById('slider-wrapper').innerHTML = `<img src="${product.imageUrl}" class="w-full h-full object-cover" />`;
+    modal.classList.remove('hidden');
+  };
+
+  document.getElementById('close-modal').addEventListener('click', () => modal.classList.add('hidden'));
+</script>

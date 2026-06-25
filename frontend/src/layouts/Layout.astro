@@ -1,0 +1,58 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body class="bg-slate-50 text-slate-800 min-h-screen relative overflow-x-hidden font-sans">
+		<div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-purple-200/50 blur-[80px] -z-10"></div>
+		<div class="absolute top-[30%] right-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-100/60 blur-[80px] -z-10"></div>
+		<div class="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] rounded-full bg-pink-100/50 blur-[80px] -z-10"></div>
+
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	/* Tailwind Base Directives */
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	/* Glassmorphism Styles */
+	.glass-nav {
+		background: rgba(255, 255, 255, 0.45);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid rgba(255, 255, 255, 0.25);
+	}
+	.glass-card {
+		background: rgba(255, 255, 255, 0.55);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		box-shadow: 0 8px 32px 0 rgba(127, 46, 229, 0.08);
+	}
+	.glass-btn {
+		background: rgba(127, 46, 229, 0.15);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
+		border: 1px solid rgba(127, 46, 229, 0.3);
+		transition: all 0.3s ease;
+	}
+	.glass-btn:hover {
+		background: #7F2EE5;
+		color: white;
+		box-shadow: 0 0 15px rgba(127, 46, 229, 0.4);
+	}
+</style>

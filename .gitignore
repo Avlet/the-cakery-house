@@ -1,12 +1,17 @@
+# Python ignore
 backend/venv/
 __pycache__/
 *.pyc
-.env
+*.pyo
+*.pyd
+*.db
+
+# Frontend ignore
 frontend/node_modules/
 frontend/.astro/
 frontend/dist/
 frontend/.git/
+
+# System
 .DS_Store
 Thumbs.db
-backend/app/__pycache__/
-backend/cakery.db
