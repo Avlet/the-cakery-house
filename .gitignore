@@ -1,0 +1,12 @@
+backend/venv/
+__pycache__/
+*.pyc
+.env
+frontend/node_modules/
+frontend/.astro/
+frontend/dist/
+frontend/.git/
+.DS_Store
+Thumbs.db
+backend/app/__pycache__/
+backend/cakery.db
